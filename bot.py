@@ -11,7 +11,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-TOKEN = '7656890972:AAGB7I4QRuZxuOTlgG5lZ_a-x4L0Yl8Uu1I'  
+TOKEN = ''  
 bot = telebot.TeleBot(TOKEN)
 
 
