@@ -11,7 +11,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-TOKEN = "7892607063:AAFN5TpKFk-u5bkxiDWcYU7J4N65GbQgnTU"  # Aqui colocas el token generado por bot father
+TOKEN = ""  # Aqui colocas el token generado por bot father
 bot = telebot.TeleBot(TOKEN)
 
 
