@@ -1,38 +1,3 @@
-import requests
-import telebot
-from telebot import types
-import time
-import threading
-import random
-import logging
-
-
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-
-
-TOKEN = ""  # Aqui colocas el token generado por bot father
-bot = telebot.TeleBot(TOKEN)
-
-
-running_flags = {}
-message_ids = {}
-lock = threading.Lock()
-
-
-frases_libertad = [
-    "Bitcoin es libertad financiera: sin bancos, sin fronteras, sin permiso.",
-    "El dinero es poder, y Bitcoin devuelve ese poder a las personas.",
-    "No confíes, verifica. Bitcoin es transparencia en un mundo de mentiras.",
-    "Con Bitcoin, eres tu propio banco. Nadie puede congelarte la libertad.",
-    "La inflación es el impuesto oculto; Bitcoin es la resistencia.",
-    "Bitcoin no pide permiso: es dinero sin gobiernos, sin censura.",
-    "La clave de tu Bitcoin es la clave de tu soberanía.",
-    "En un mundo de control, Bitcoin es el último bastión de libertad.",
-    "Bitcoin es el dinero del pueblo, no de los políticos.",
-    "Si no posees tus claves, no posees tus bitcoins… ni tu libertad."
-]
-
 
 stop_keyboard = types.InlineKeyboardMarkup()
 stop_button = types.InlineKeyboardButton("Detener", callback_data="stop_bot")
@@ -46,7 +11,8 @@ def get_btc_price():
         return f"$ BTC: ${data['bitcoin']['usd']:,}"
     except Exception as e:
         logger.error(f"Error obteniendo precio BTC: {e}")
-return f"⚠️ {random.choice(frases_libertad)}"
+def mensaje_libertad():
+    return f"⚠️ {random.choice(frases_libertad)}"
 
 def get_mempool_fees():
     try:
@@ -94,9 +60,9 @@ def clear_chat_history(chat_id):
                 break
 
         try:
-with lock:
+            with lock:
                 if chat_id in message_ids and message_ids[chat_id]:
-                    for msg_id in message_ids[chat_id][:]:  
+                    for msg_id in message_ids[chat_id][:]: 
                         try:
                             bot.delete_message(chat_id, msg_id)
                             message_ids[chat_id].remove(msg_id)
